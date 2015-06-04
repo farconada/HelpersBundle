@@ -11,7 +11,7 @@
     }
   ],
   "require": {
-    "rhumsaa/uuid": "~2",
+    "ramsey/uuid": "*",
     "simple-bus/symfony-bridge": "*",
     "simple-bus/doctrine-orm-bridge": "*"
   },
