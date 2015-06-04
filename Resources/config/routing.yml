@@ -1,0 +1,3 @@
+fer_helpers_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: FerHelpersBundle:Default:index }

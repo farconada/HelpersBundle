@@ -1,0 +1,29 @@
+{
+  "name": "fer/helpers",
+  "description": "Helper classes and utils",
+  "keywords": [],
+  "type": "symfony-bundle",
+  "license": "GPLv2",
+  "authors": [
+    {
+      "name": "Fernando Arconada",
+      "email": "fernando.arconada@gmail.com"
+    }
+  ],
+  "require": {
+    "rhumsaa/uuid": "~2",
+    "simple-bus/symfony-bridge": "*"
+  },
+  "require-dev": {
+    "autoload": {
+      "psr-0": {"Fer\\GeneratorBundle": ""}
+    },
+    "target-dir": "Fer/HelpersBundle",
+    "minimum-stability": "dev",
+    "extra": {
+      "branch-alias": {
+        "dev-master": "1.0.x-dev"
+      }
+    }
+  }
+}

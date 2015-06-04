@@ -1,0 +1,4 @@
+services:
+#    fer_helpers.example:
+#        class: Fer\HelpersBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
