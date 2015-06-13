@@ -7,7 +7,7 @@
  */
 namespace Fer\HelpersBundle\CQRS;
 
-use Ramsey\Uuid\Uuid;
+use Rhumsaa\Uuid\Uuid;
 
 class UuidGenerator
 {
