@@ -7,7 +7,7 @@
  */
 namespace Fer\HelpersBundle\CQRS;
 
-abstract class AbstractAggregateId implements AggregateIdInterface
+trait AggregateIdtrait
 {
 
     /**
