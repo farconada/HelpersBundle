@@ -3,3 +3,9 @@ services:
     class: Fer\HelpersBundle\EventListener\BodyListener
     tags:
       - { name: kernel.event_listener, event: kernel.request, priority: 10}
+
+  app.param_converter.array2command_converter:
+    class: Fer\HelpersBundle\ParamConverter\Array2CommandConverter
+    arguments: [ @validator ]
+    tags:
+      - { name: request.param_converter, converter: array2command_converter }
