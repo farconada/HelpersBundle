@@ -8,6 +8,7 @@
 
 namespace Fer\HelpersBundle\ParamConverter;
 
+use Fer\HelpersBundle\Exception\Array2CommandConverterException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,7 +34,8 @@ class Array2CommandConverter implements ParamConverterInterface {
     public function apply(Request $request, ParamConverter $configuration)
     {
         $class = $configuration->getClass();
-        $command = new $class($request->get($configuration->getOptions()['param']));
+        $data = $request->get($configuration->getOptions()['param']) ? $request->get($configuration->getOptions()['param']): array();
+        $command = new $class($data);
         $errors = $this->validator->validate($command);
         if(count($errors)){
             throw new Array2CommandConverterException($errors, "There are validation errors");
