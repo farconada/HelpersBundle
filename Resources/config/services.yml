@@ -9,3 +9,15 @@ services:
     arguments: [ @validator ]
     tags:
       - { name: request.param_converter, converter: array2command_converter }
+
+  app.rest_exception_listener:
+    class: Fer\HelpersBundle\EventListener\RestExceptionListener
+    arguments: [ @tbbc_rest_util.error.error_resolver, %twig.exception_listener.controller%, @logger ]
+    tags:
+     - { name: kernel.event_subscriber }
+     - { name: monolog.logger, channel: request}
+
+  app.validation_error_factory:
+    class: Fer\HelpersBundle\Error\ValidationErrorFactory
+    tags:
+      - {name: tbbc_rest_util.error_factory}
