@@ -35,11 +35,13 @@ class Array2CommandConverter implements ParamConverterInterface {
     {
         $class = $configuration->getClass();
         $data = $request->get($configuration->getOptions()['param']) ? $request->get($configuration->getOptions()['param']): array();
+
         $command = new $class($data);
         $errors = $this->validator->validate($command);
         if(count($errors)){
             throw new Array2CommandConverterException($errors, "There are validation errors");
         }
+        $request->attributes->set($configuration->getName(), $command);
         return true;
     }
 
