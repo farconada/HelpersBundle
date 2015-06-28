@@ -34,7 +34,15 @@ class Array2CommandConverter implements ParamConverterInterface {
     public function apply(Request $request, ParamConverter $configuration)
     {
         $class = $configuration->getClass();
+
         $data = $request->get($configuration->getOptions()['param']) ? $request->get($configuration->getOptions()['param']): array();
+        if ($configuration->getOptions()['param'] === '_root') {
+            $data = $request->request->all();
+        }
+
+        if ($configuration->getOptions()['include_route_params'] == true) {
+            $data = array_merge($data, $request->attributes->get('_route_params'));
+        }
 
         $command = new $class($data);
         $errors = $this->validator->validate($command);
