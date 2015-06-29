@@ -10,6 +10,12 @@ namespace Fer\HelpersBundle\CQRS;
 use Fer\HelpersBundle\Traits\ArrayToPropertiesTrait;
 use SimpleBus\Message\Name\NamedMessage;
 
+/**
+ * Default CQRS DDD Event configured for SimpleBus named Messages
+ *
+ * Class DefaultDomainEvent
+ * @package Fer\HelpersBundle\CQRS
+ */
 abstract class DefaultDomainEvent implements NamedMessage
 {
 

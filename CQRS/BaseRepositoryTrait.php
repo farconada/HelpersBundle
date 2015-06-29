@@ -9,11 +9,17 @@
 namespace Fer\HelpersBundle\CQRS;
 
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityNotFoundException;
 use Doctrine\ORM\QueryBuilder;
 use Fer\HelpersBundle\CQRS\AggregateRootInterface;
 use Doctrine\Common\Collections\Criteria;
 
+/**
+ * Trait with a basic implementation of RepositoryInterface for Doctrine ORM
+ * Class BaseRepositoryTrait
+ * @package Fer\HelpersBundle\CQRS
+ */
 trait BaseRepositoryTrait {
     public function nextIdentity(AggregateIdInterface $id = null)
     {
@@ -55,6 +61,12 @@ trait BaseRepositoryTrait {
         $this->getEntityManager()->flush($entity);
     }
 
+    /**
+     * Returns a collection with all objects of an entity
+     * If there is a field "position" then the collection is ordered by "position" ASC
+     *
+     * @return ArrayCollection
+     */
     public function findAll() {
         $orderby = array_key_exists('position', $this->_class->columnNames) ? ['position' => 'ASC']: null;
         return $this->findBy(array(), $orderby);

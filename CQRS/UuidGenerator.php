@@ -11,6 +11,11 @@ use Rhumsaa\Uuid\Uuid;
 
 class UuidGenerator
 {
+    /**
+     * Returns an Uuid string
+     *
+     * @return string Uuid
+     */
     public static function generate()
     {
         return Uuid::uuid4()->toString();

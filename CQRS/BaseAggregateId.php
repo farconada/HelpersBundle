@@ -7,7 +7,13 @@
  */
 namespace Fer\HelpersBundle\CQRS;
 
-trait AggregateIdtrait
+/**
+ * Abstract class with a default implementation for AggreateIDs
+ *
+ * Class BaseAggregateId
+ * @package Fer\HelpersBundle\CQRS
+ */
+abstract class  BaseAggregateId
 {
 
     /**
@@ -16,6 +22,9 @@ trait AggregateIdtrait
     protected $id;
 
     /**
+     * If not $id the builds a new Uuid
+     * You should always pass and $id (from repository nextIdentity() ) even for Uuid,
+     *
      * @param string $id
      */
     public function __construct($id = null)
