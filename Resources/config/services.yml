@@ -21,3 +21,9 @@ services:
     class: Fer\HelpersBundle\Error\ValidationErrorFactory
     tags:
       - {name: tbbc_rest_util.error_factory}
+
+  app.validator.choice_from_config:
+    class: Fer\HelpersBundle\Validator\Constraints\ChoiceFromConfigValidator
+    arguments: [@service_container]
+    tags:
+      - { name: validator.constraint_validator, alias: 'choice_from_config' }
