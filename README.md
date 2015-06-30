@@ -85,6 +85,28 @@ Define un método protected classToArray() que devuelve un array asociativo con 
 Define un método protected arrayToProperties($dataArray) que coge un array asociativo y le asigna los valores
 a las properties de la clase.
 
+### Controller
+
+####CsrfController
+
+Sirve para publicar una URL en la que se genera un token CSRF /csrf/{intention}
+La Response es json con el valor y el intent
+
+#### Csrf Annotation
+Comprueba el token CSRF de un action 
+
+```
+        /**
+         * @Csrf(intention="form")
+         * @Route(path="/test/{id}")
+         * @ParamConverter("productCommand", class="AppBundle\Command\Message\NewProduct", options={"param": "_root", "include_route_params": true}, converter="array2command_converter")
+         */
+        public function testAction($productCommand)
+        {
+            return new Response("It works");
+        }
+```
+
 ### CQRS
 
 #### UuidGenerator

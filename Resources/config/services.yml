@@ -27,3 +27,12 @@ services:
     arguments: [@service_container]
     tags:
       - { name: validator.constraint_validator, alias: 'choice_from_config' }
+
+  app.csrf_validator_listener:
+      class: Fer\HelpersBundle\EventListener\CsrfAnnotationSubscriber
+      arguments:
+          - @request_stack
+          - @security.csrf.token_manager
+          - @annotation_reader
+      tags:
+          - { name: kernel.event_subscriber }
