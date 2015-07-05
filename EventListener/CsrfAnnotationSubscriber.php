@@ -39,6 +39,10 @@ class CsrfAnnotationSubscriber implements EventSubscriberInterface
      * @var Reader
      */
     protected $reader;
+
+    protected $cache =  null;
+    protected $cache_ttl;
+
     /**
      * @var string
      */
@@ -49,6 +53,20 @@ class CsrfAnnotationSubscriber implements EventSubscriberInterface
         $this->requestStack = $requestStack;
         $this->csrfManager =  $csrfManager;
         $this->reader =       $reader;
+    }
+
+    public function setCache($cache, $ttl = 300)
+    {
+        $this->cache = $cache;
+        $this->cache_ttl = $ttl;
+    }
+
+    public function tokenUsed($token)
+    {
+        if ($this->cache) {
+            return $this->cache->fetch($token);
+        }
+        return false;
     }
     /**
      * Returns an array of event names this subscriber wants to listen to.
@@ -103,8 +121,18 @@ class CsrfAnnotationSubscriber implements EventSubscriberInterface
 
         // Csrf stateless Token, double send
         if ($annotation->stateless && !($request_method === 'OPTIONS')) {
+            // ToDo: validar que sea un token grande (md5, sha) y que no haya sido usado recientemente
             $header = $request->headers->get($annotation->csrf_header);
-            if ($request->get($annotation->param) === $header) {
+            if (
+                ($request->get($annotation->param) === $header)
+                &&
+                (strlen($token) > 5)
+                &&
+                !$this->tokenUsed($token)
+            ) {
+                if ($this->cache) {
+                    $this->cache->save($token, $token, $this->cache_ttl);
+                }
                 return true;
             }
             return false;

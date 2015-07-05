@@ -34,5 +34,7 @@ services:
           - @request_stack
           - @security.csrf.token_manager
           - @annotation_reader
+      calls:
+          - [setCache, [@doctrine_cache.providers.csrf_cache, 300]]
       tags:
           - { name: kernel.event_subscriber }
