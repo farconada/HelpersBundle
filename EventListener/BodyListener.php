@@ -41,7 +41,9 @@ class BodyListener {
 
         if ($format === 'json' && !empty($content)) {
             $data = @json_decode($content, true);
-            $request->request = new ParameterBag($data);
+            if (is_array($data)) {
+                $request->request = new ParameterBag($data);
+            }
         }
 
     }
