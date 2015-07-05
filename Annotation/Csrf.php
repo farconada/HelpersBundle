@@ -24,4 +24,8 @@ final class Csrf extends Annotation
      * @var string
      */
     public $param = '_csrf';
+
+    public $stateless = false;
+
+    public $csrf_header =  'X-Csrf-Token';
 }

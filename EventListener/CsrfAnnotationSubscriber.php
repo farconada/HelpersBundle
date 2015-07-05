@@ -97,8 +97,20 @@ class CsrfAnnotationSubscriber implements EventSubscriberInterface
      */
     public function validate(Annotation $annotation)
     {
-        $token = $this->requestStack->getMasterRequest()->get($annotation->param);
-        $request_method = $this->requestStack->getMasterRequest()->getMethod();
+        $request = $this->requestStack->getMasterRequest();
+        $token = $request->get($annotation->param);
+        $request_method = $request->getMethod();
+
+        // Csrf stateless Token, double send
+        if ($annotation->stateless && !($request_method === 'OPTIONS')) {
+            $header = $request->headers->get($annotation->csrf_header);
+            if ($request->get($annotation->param) === $header) {
+                return true;
+            }
+            return false;
+        }
+
+        // Csrf session token
         $csrfToken = new CsrfToken($annotation->intention, $token);
         $result = $this->csrfManager->isTokenValid($csrfToken);
         if ($result && !($request_method === 'OPTIONS')) {
