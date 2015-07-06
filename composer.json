@@ -12,8 +12,8 @@
   ],
   "require": {
     "ramsey/uuid": "*",
-    "simple-bus/symfony-bridge": "*",
-    "simple-bus/doctrine-orm-bridge": "*"
+    "simple-bus/symfony-bridge": "^4.0",
+    "simple-bus/doctrine-orm-bridge": "^4.0"
   },
   "require-dev": {
   },
