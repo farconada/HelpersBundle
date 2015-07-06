@@ -10,31 +10,31 @@ services:
     tags:
       - { name: request.param_converter, converter: array2command_converter }
 
-  app.rest_exception_listener:
-    class: Fer\HelpersBundle\EventListener\RestExceptionListener
-    arguments: [ @tbbc_rest_util.error.error_resolver, %twig.exception_listener.controller%, @logger ]
-    tags:
-     - { name: kernel.event_subscriber }
-     - { name: monolog.logger, channel: request}
-
-  app.validation_error_factory:
-    class: Fer\HelpersBundle\Error\ValidationErrorFactory
-    tags:
-      - {name: tbbc_rest_util.error_factory}
-
   app.validator.choice_from_config:
     class: Fer\HelpersBundle\Validator\Constraints\ChoiceFromConfigValidator
     arguments: [@service_container]
     tags:
       - { name: validator.constraint_validator, alias: 'choice_from_config' }
 
-  app.csrf_validator_listener:
-      class: Fer\HelpersBundle\EventListener\CsrfAnnotationSubscriber
-      arguments:
-          - @request_stack
-          - @security.csrf.token_manager
-          - @annotation_reader
-      calls:
-          - [setCache, [@doctrine_cache.providers.csrf_cache, 300]]
-      tags:
-          - { name: kernel.event_subscriber }
+#  app.rest_exception_listener:
+#    class: Fer\HelpersBundle\EventListener\RestExceptionListener
+#    arguments: [ @tbbc_rest_util.error.error_resolver, %twig.exception_listener.controller%, @logger ]
+#    tags:
+#     - { name: kernel.event_subscriber }
+#     - { name: monolog.logger, channel: request}
+#
+#  app.validation_error_factory:
+#    class: Fer\HelpersBundle\Error\ValidationErrorFactory
+#    tags:
+#      - {name: tbbc_rest_util.error_factory}
+#
+#  app.csrf_validator_listener:
+#      class: Fer\HelpersBundle\EventListener\CsrfAnnotationSubscriber
+#      arguments:
+#          - @request_stack
+#          - @security.csrf.token_manager
+#          - @annotation_reader
+#      calls:
+#          - [setCache, [@doctrine_cache.providers.csrf_cache, 300]]
+#      tags:
+#          - { name: kernel.event_subscriber }
