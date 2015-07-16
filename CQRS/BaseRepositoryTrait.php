@@ -26,7 +26,7 @@ trait BaseRepositoryTrait {
         if (!is_null($id)) {
             return $id;
         }
-        $idClassName = $this->_class . 'Id';
+        $idClassName = $this->_class->getName() . 'Id';
         return new $idClassName();
     }
 
