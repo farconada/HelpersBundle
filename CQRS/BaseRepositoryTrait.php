@@ -43,9 +43,6 @@ trait BaseRepositoryTrait {
     public function getOfIdentity(AggregateIdInterface $aggregateId)
     {
         $entity = $this->find($aggregateId->id());
-        if (!$entity) {
-            throw new EntityNotFoundException();
-        }
         return $entity;
     }
 
