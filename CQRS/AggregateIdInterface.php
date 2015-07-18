@@ -18,7 +18,7 @@ interface AggregateIdInterface
      *
      * @return string
      */
-    public function id();
+    public function getId();
 
     /**
      * Return true if and ID object is equals

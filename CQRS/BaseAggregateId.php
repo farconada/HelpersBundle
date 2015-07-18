@@ -35,7 +35,7 @@ abstract class  BaseAggregateId
     /**
      * @return string
      */
-    public function id()
+    public function getId()
     {
         return $this->id;
     }
@@ -46,7 +46,7 @@ abstract class  BaseAggregateId
      */
     public function equals(AggregateIdInterface $aggregateId)
     {
-        return $this->id() === $aggregateId->id();
+        return $this->getId() === $aggregateId->getId();
     }
 
     /**
@@ -54,6 +54,6 @@ abstract class  BaseAggregateId
      */
     public function __toString()
     {
-        return $this->id();
+        return $this->getId();
     }
 }
