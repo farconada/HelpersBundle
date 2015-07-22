@@ -42,7 +42,7 @@ trait BaseRepositoryTrait {
 
     public function getOfIdentity(AggregateIdInterface $aggregateId)
     {
-        $entity = $this->find($aggregateId->id());
+        $entity = $this->find($aggregateId->getId());
         return $entity;
     }
 
