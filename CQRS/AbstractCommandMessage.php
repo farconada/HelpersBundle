@@ -8,7 +8,6 @@
 namespace Fer\HelpersBundle\CQRS;
 
 use Fer\HelpersBundle\Traits\ArrayToPropertiesTrait;
-use SimpleBus\Message\Name\NamedMessage;
 use Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException;
 
 /**
@@ -16,7 +15,7 @@ use Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException;
  * Class DefaultCommand
  * @package Fer\HelpersBundle\CQRS
  */
-abstract class DefaultCommand implements NamedMessage
+abstract class AbstractCommandMessage implements CommandInterface
 {
     use ArrayToPropertiesTrait;
 
@@ -34,39 +33,42 @@ abstract class DefaultCommand implements NamedMessage
         return static::COMMAND_NAME;
     }
 
+    protected function buildFromEntity($entity) {
+        self::mapProperties($entity, $this);
+    }
     /**
      * Initializes a $command properties from an $entity
      *
-     * @param $command target
-     * @param $entity source
+     * @param $target
+     * @param $source
      * @return $command
      */
-    protected static function mapProperties($command, $entity)
+    private static function mapProperties($source, $target)
     {
-        $properties = get_class_vars(get_class($command));
+        $properties = get_class_vars(get_class($target));
         foreach ($properties as $prop => $propValue) {
             try {
                 // ejp getDescription()
                 $method = 'get'.ucfirst($prop);
-                if (method_exists($entity, $method)) {
-                    $command->$prop = $entity->$method();
+                if (method_exists($source, $method)) {
+                    $target->$prop = $source->$method();
                 }
 
                 // ejp isReady()
                 $method = 'is'.ucfirst($prop);
-                if (method_exists($entity, $method)) {
-                    $command->$prop = $entity->$method();
+                if (method_exists($source, $method)) {
+                    $target->$prop = $source->$method();
                 }
 
                 //ejp name()
                 $method = $prop;
-                if (method_exists($entity, $method)) {
-                    $command->$prop = $entity->$method();
+                if (method_exists($source, $method)) {
+                    $target->$prop = $source->$method();
                 }
             } catch (NoSuchPropertyException $exception) {
             }
         }
 
-        return $command;
+        return $target;
     }
 }
