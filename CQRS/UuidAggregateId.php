@@ -2,20 +2,18 @@
 /**
  * Created by PhpStorm.
  * User: fernando
- * Date: 7/1/15
- * Time: 10:56
+ * Date: 26/7/15
+ * Time: 16:10
  */
+
 namespace Fer\HelpersBundle\CQRS;
 
-/**
- * Abstract class with a default implementation for AggreateIDs
- *
- * Class BaseAggregateId
- * @package Fer\HelpersBundle\CQRS
- */
-abstract class  BaseAggregateId
-{
 
+use Fer\HelpersBundle\CQRS\AggregateIdInterface;
+use Fer\HelpersBundle\CQRS\UuidGenerator;
+
+abstract class UuidAggregateId implements AggregateIdInterface
+{
     /**
      * @var string
      */
