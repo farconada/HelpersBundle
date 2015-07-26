@@ -6,12 +6,12 @@
  * Time: 17:01
  */
 
-namespace Fer\HelpersBundle\CQRS;
+namespace Fer\HelpersBundle\Traits;
 
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\EntityNotFoundException;
 use Doctrine\ORM\QueryBuilder;
+use Fer\HelpersBundle\CQRS\AggregateIdInterface;
 use Fer\HelpersBundle\CQRS\AggregateRootInterface;
 use Doctrine\Common\Collections\Criteria;
 
@@ -20,7 +20,7 @@ use Doctrine\Common\Collections\Criteria;
  * Class BaseRepositoryTrait
  * @package Fer\HelpersBundle\CQRS
  */
-trait BaseRepositoryTrait {
+trait DoctrineORMRepositoryTrait {
     public function nextIdentity(AggregateIdInterface $id = null)
     {
         if (!is_null($id)) {
