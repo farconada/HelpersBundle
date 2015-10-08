@@ -27,6 +27,6 @@ abstract class AbstractDomainEvent implements DomainEventInterface
 
     public static function messageName()
     {
-        return self::EVENT_NAME;
+        return static::EVENT_NAME;
     }
 }
