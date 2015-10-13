@@ -38,3 +38,11 @@ services:
 #          - [setCache, [@doctrine_cache.providers.csrf_cache, 300]]
 #      tags:
 #          - { name: kernel.event_subscriber }
+#  app.jsonschema_validator_listener:
+#      class: Fer\HelpersBundle\EventListener\JsonSchemaAnnotationSubscriber
+#      arguments:
+#          - @request_stack
+#          - @annotation_reader
+#          - %kernel.root_dir%/config/json-schema
+#      tags:
+#          - { name: kernel.event_subscriber }

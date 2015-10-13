@@ -13,7 +13,8 @@
   "require": {
     "ramsey/uuid": "*",
     "simple-bus/symfony-bridge": "^4.0",
-    "simple-bus/doctrine-orm-bridge": "^4.0"
+    "simple-bus/doctrine-orm-bridge": "^4.0",
+    "justinrainbow/json-schema": "^1.5"
   },
   "require-dev": {
   },
